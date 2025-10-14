@@ -1,0 +1,69 @@
+<section class="container" style="padding: 56px 24px 28px; text-align: center">
+  <div class="chip" style="display: inline-flex; gap: 8px; align-items: center">
+    AI-Powered Forecasting • Accuracy at Lightning Speed
+  </div>
+  <h1 class="h1">
+    “Empowering Power Utilities with Instant Demand & ISTS Drawal Forecasts — In
+    Seconds”<br />
+  </h1>
+  <p class="muted" style="max-width: 900px; margin: 0 auto 22px">
+    <span style="font-size: large;font-weight: bold;">PREDICT &nbsp;&nbsp; - &nbsp;&nbsp; PLAN &nbsp;&nbsp;- &nbsp;&nbsp; PERFORM <br /><br /></span>
+    ENERBUFF AI empowers utilities to forecast demand
+    and ISTS dependency in seconds — aligning procurement with real demand,
+    reducing DSM penalties, and improving grid reliability effortlessly.
+  </p>
+  <div
+    style="display: flex; gap: 12px; justify-content: center; margin-top: 10px"
+  >
+    <!-- <a class="btn btn-primary" routerLink="/auth">Start Free</a> -->
+    <!-- <a class="btn" href="#demo">Try Live Demo</a> -->
+    <ng-container *ngIf="!isLoggedIn; else loggedInCta">
+      <a
+        class="btn"
+        routerLink="/auth"
+        style="
+          background: linear-gradient(90deg, #facc15 0%, #fbbf24 100%);
+          color: #222;
+          font-weight: bold;
+          font-size: 1.15rem;
+          border-radius: 32px;
+          box-shadow: 0 4px 16px rgba(250, 204, 21, 0.18);
+          padding: 14px 38px;
+          border: none;
+          outline: none;
+          transition: transform 0.15s, box-shadow 0.15s;
+          text-shadow: 0 1px 0 #fff7e6;
+          letter-spacing: 0.03em;
+        "
+        onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 6px 24px rgba(250,204,21,0.28)'"
+        onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(250,204,21,0.18)'"
+      >
+        🚀 Register to get 30 Free EnerCoins
+      </a>
+    </ng-container>
+    <ng-template #loggedInCta>
+      <a
+        class="btn"
+        routerLink="/demo"
+        style="
+          background: linear-gradient(90deg, #facc15 0%, #fbbf24 100%);
+          color: #222;
+          font-weight: bold;
+          font-size: 1.15rem;
+          border-radius: 32px;
+          box-shadow: 0 4px 16px rgba(250, 204, 21, 0.18);
+          padding: 14px 38px;
+          border: none;
+          outline: none;
+          transition: transform 0.15s, box-shadow 0.15s;
+          text-shadow: 0 1px 0 #fff7e6;
+          letter-spacing: 0.03em;
+        "
+        onmouseover="this.style.transform='scale(1.06)';this.style.boxShadow='0 6px 24px rgba(250,204,21,0.28)'"
+        onmouseout="this.style.transform='';this.style.boxShadow='0 4px 16px rgba(250,204,21,0.18)'"
+      >
+        Click here to start forecasting. ✅
+      </a>
+    </ng-template>
+  </div>
+</section>

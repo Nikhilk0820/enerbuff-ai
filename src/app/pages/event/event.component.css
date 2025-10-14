@@ -1,0 +1,95 @@
+:host {
+  display: block;
+  padding-top: 24px;
+}
+
+.event-page {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tab-shell {
+  background: linear-gradient(90deg, #011b1b 0%, #2a3c75 100%);
+  border-radius: 18px 18px 0 0;
+  padding: 18px 24px 4px;
+  box-shadow: 0 20px 40px rgba(10, 20, 40, 0.35);
+  border: 1px solid rgba(86, 210, 255, 0.15);
+  border-bottom: none;
+  width: 75%;
+  margin: auto !important;
+}
+
+.tab-bar {
+  display: flex;
+  gap: 24px;
+  align-items: flex-end;
+}
+
+.tab {
+  position: relative;
+  border: none;
+  background: transparent;
+  color: #a7b3ce;
+  font-size: 22px;
+  font-weight: 600;
+  padding: 12px 20px;
+  border-radius: 12px 12px 0 0;
+  cursor: pointer;
+  transition: color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.tab:hover {
+  color: #e5edff;
+}
+
+.tab:focus-visible {
+  outline: 2px solid #57d2ff;
+  outline-offset: 3px;
+}
+
+.tab.is-active {
+  background: linear-gradient(128deg, #5ac65a, #353196);
+  color: #ffffff;
+  box-shadow: 0 10px 20px rgba(29, 71, 255, 0.35);
+}
+
+.tab.is-active::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 3px 3px 0 0;
+}
+
+.tab-body {
+  border: 1px solid rgba(86, 210, 255, 0.15);
+  border-radius: 0 18px 18px 18px;
+  background: rgba(9, 16, 28, 0.85);
+  padding: 0;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.tab-panel {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .tab-shell {
+    padding: 14px 16px 4px;
+  }
+
+  .tab-bar {
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+}

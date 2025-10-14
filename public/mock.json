@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "firstName": "Demo",
+      "lastName": "User",
+      "email": "demo@enerbuff.ai",
+      "phone": "+15551234567",
+      "password": "Password123"
+    }
+  ],
+  "note": "Registration stores new users in localStorage under 'mock_users'."
+}
+

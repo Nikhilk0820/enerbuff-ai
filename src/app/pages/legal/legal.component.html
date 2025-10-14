@@ -1,0 +1,49 @@
+<section class="legal">
+  <div class="legal__container">
+    <aside class="legal__nav">
+      <p class="legal__eyebrow">Policy library</p>
+      <nav>
+        <a
+          *ngFor="let policy of policies"
+          [routerLink]="['/legal', policy.slug]"
+          [class.active]="policy.slug === activePolicy.slug"
+        >
+          <span>{{ policy.title }}</span>
+          <small>{{ policy.chipLabel }}</small>
+        </a>
+      </nav>
+    </aside>
+
+    <article class="legal__content" *ngIf="activePolicy as policy">
+      <header class="legal__header">
+        <p class="legal__eyebrow">{{ policy.subtitle }}</p>
+        <h1>{{ policy.title }}</h1>
+        <p class="muted">Last updated {{ policy.updatedOn }}</p>
+      </header>
+
+      <section class="legal__summary">
+        <p>{{ policy.description }}</p>
+      </section>
+
+      <section *ngFor="let section of policy.sections" class="legal__section">
+        <h2>{{ section.title }}</h2>
+        <p *ngFor="let paragraph of section.paragraphs">
+          {{ paragraph }}
+        </p>
+        <ul *ngIf="section.bullets?.length">
+          <li *ngFor="let bullet of section.bullets">{{ bullet }}</li>
+        </ul>
+      </section>
+
+      <div class="legal__card">
+        <h3>Need a custom agreement?</h3>
+        <p>
+          Email
+          <a href="mailto:support_ai@enerbuff.com">support_ai&#64;enerbuff.com</a>
+          to share your procurement template or security questionnaire. Our team
+          responds within two business days.
+        </p>
+      </div>
+    </article>
+  </div>
+</section>

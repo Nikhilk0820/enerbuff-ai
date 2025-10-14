@@ -1,0 +1,35 @@
+<section id="how" class="container how-section">
+  <h2 class="h2">How it Works</h2>
+  <div
+    class="grid grid-2 how-grid"
+    id="how-steps"
+    aria-live="polite"
+    aria-label="Forecast preparation steps"
+  >
+    <div
+      class="panel how-panel"
+      *ngFor="let section of sections; trackBy: trackByIndex"
+    >
+      <div class="h3">{{ section.title }}</div>
+      <ol class="how-list">
+        <li
+          *ngFor="let item of section.items; let i = index; trackBy: trackByIndex"
+          [class.how-list__item--hidden]="!showAllSteps && i >= 2"
+        >
+          {{ item }}
+        </li>
+      </ol>
+    </div>
+  </div>
+  <div class="how-toggle" *ngIf="hasHiddenItems">
+    <button
+      type="button"
+      class="btn btn-ghost"
+      (click)="toggleSteps()"
+      [attr.aria-expanded]="showAllSteps"
+      aria-controls="how-steps"
+    >
+      {{ showAllSteps ? 'See less' : 'See more' }}
+    </button>
+  </div>
+</section>

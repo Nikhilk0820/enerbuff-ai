@@ -1,0 +1,241 @@
+<header
+  style="
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgba(11, 15, 19, 0.7);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--ring);
+  "
+>
+  <div
+    class="container"
+    style="
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      gap: 12px;
+      flex-wrap: wrap;
+    "
+  >
+    <div
+      style="display: flex; gap: 14px; align-items: center; font-weight: 800"
+    >
+      <img
+        src="EnerbuffAI.png"
+        alt="EnerBuff AI logo"
+        style="
+          height: 28px;
+          width: 28px;
+          display: block;
+          object-fit: contain;
+          border-radius: 4px;
+        "
+      />
+      <span routerLink="/" style="cursor: pointer">ENERBUFF AI</span>
+    </div>
+
+    <nav style="display: flex; gap: 18px; align-items: center; flex-wrap: wrap">
+      <ng-container *ngIf="!isEventPage; else eventLinks">
+        <button
+          type="button"
+          style="
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            padding: 0;
+          "
+          (click)="navigateTo('features', $event)"
+        >
+          Features
+        </button>
+
+        <button
+          type="button"
+          style="
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            padding: 0;
+          "
+          (click)="navigateTo('faq', $event)"
+        >
+          FAQ
+        </button>
+        <button
+          type="button"
+          style="
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            padding: 0;
+          "
+          (click)="navigateTo('contact', $event)"
+        >
+          Contact Us
+        </button>
+        <button
+          type="button"
+          style="
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            padding: 6px 14px;
+            border: 1px solid var(--ring);
+            cursor: pointer;
+            border-radius: 999px;
+            background: linear-gradient(90deg, #183c2c 0%, #2a3c75 100%);
+            color: #ffffff;
+            font-size: 13px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-weight: bold;
+          "
+          (click)="goToEvent($event)"
+        >
+          <mat-icon>event_available</mat-icon>
+          Forecast Engine
+        </button>
+      </ng-container>
+      <ng-template #eventLinks>
+        <button
+          type="button"
+          style="
+            background: none;
+            border: none;
+            color: inherit;
+            font: inherit;
+            cursor: pointer;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+          "
+          (click)="navigateTo(undefined, $event)"
+        >
+          <span
+            style="
+              display: inline-flex;
+              align-items: center;
+              justify-content: center;
+              width: 20px;
+              height: 20px;
+              border-radius: 50%;
+              margin-right: 2px;
+            "
+          >
+          </span>
+          <mat-icon>home</mat-icon>
+          Go back to Home
+        </button>
+        <button
+          type="button"
+          style="
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 6px 14px;
+            border: 1px solid var(--ring);
+            border-radius: 999px;
+            background: linear-gradient(90deg, #011b1b 0%, #2a3c75 100%);
+            color: #ffffff;
+            font-size: 13px;
+            white-space: nowrap;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            font-weight: bold;
+          "
+          (click)="isHistoryPage ? goToEvent($event) : goToHistory($event)"
+        >
+          <mat-icon>{{
+            isHistoryPage ? "event_available" : "history"
+          }}</mat-icon>
+          {{ isHistoryPage ? "Forecast Engine" : "Go to Forecast History" }}
+        </button>
+      </ng-template>
+
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 6px 14px;
+          border: 1px solid var(--ring);
+          border-radius: 999px;
+          background: linear-gradient(90deg, #011b1b 0%, #2a3c75 100%);
+          color: #ffffff;
+          font-size: 13px;
+          white-space: nowrap;
+          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+          font-weight: bold;
+        "
+      >
+        <span>EnerCoins - {{ enerCoinBalance | number : "1.0-0" }} </span>
+        <button
+          type="button"
+          class="btn btn-primary"
+          style="padding: 4px 10px; font-size: 13px"
+          routerLink="/buy-credit"
+        >
+          <mat-icon>shopping_cart</mat-icon>
+          Buy More EnerCoins
+        </button>
+      </div>
+
+      <ng-container *ngIf="user as u; else authLinks">
+        <span style="position: relative; margin-left: 10px">
+          <button
+            type="button"
+            class="btn btn-primary"
+            (click)="toggleMenu($event)"
+          >
+            My Profile &#9662;
+          </button>
+          <div
+            *ngIf="menuOpen"
+            style="
+              position: absolute;
+              right: 0;
+              top: calc(100% + 8px);
+              background: linear-gradient(90deg, #011b1b 0%, #2a3c75 100%);
+              border: 1px solid var(--ring);
+              border-radius: 8px;
+              min-width: 220px;
+              padding: 10px;
+              display: flex;
+              flex-direction: column;
+              gap: 8px;
+              z-index: 50;
+              box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+            "
+            (click)="$event.stopPropagation()"
+          >
+            <div class="muted" style="font-size: 13px">
+              Welcome {{ u.name || u.email }}
+            </div>
+            <a
+              class="btn btn-ghost"
+              routerLink="/profile"
+              (click)="closeMenu($event)"
+              >Profile</a
+            >
+            <button type="button" class="btn" (click)="logout($event)">
+              Logout
+            </button>
+          </div>
+        </span>
+      </ng-container>
+
+      <ng-template #authLinks>
+        <a class="btn btn-primary" routerLink="/auth">Login / Register</a>
+      </ng-template>
+    </nav>
+  </div>
+</header>

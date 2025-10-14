@@ -1,0 +1,13 @@
+<section id="faq" class="container" style="padding:18px 0 10px">
+  <h2 class="h2" style="margin-bottom:10px">FAQ</h2>
+  <div class="grid" style="gap:14px">
+    <div *ngFor="let item of faq; let i = index" class="panel" style="padding:14px 18px">
+      <button class="btn" style="width:100%;justify-content:space-between;background:transparent;border:none;padding:0" (click)="toggleFaq(i)">
+        <span style="font-weight:700">{{item.q}}</span>
+        <span class="muted">{{ item.open ? '–' : '+' }}</span>
+      </button>
+      <div *ngIf="item.open" class="muted" style="margin-top:8px">{{item.a}}</div>
+    </div>
+  </div>
+</section>
+

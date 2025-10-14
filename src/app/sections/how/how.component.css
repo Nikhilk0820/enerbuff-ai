@@ -1,0 +1,31 @@
+.how-section {
+  padding: 18px 0 42px;
+}
+
+.how-grid {
+  margin-top: 16px;
+}
+
+.how-panel {
+  padding: 22px;
+}
+
+.how-list {
+  margin: 0;
+  padding-left: 18px;
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.how-list__item--hidden {
+  display: none;
+}
+
+.how-toggle {
+  margin-top: 18px;
+  text-align: center;
+}
+
+.how-toggle .btn {
+  min-width: 140px;
+}

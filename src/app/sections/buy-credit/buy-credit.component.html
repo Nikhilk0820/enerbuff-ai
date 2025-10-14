@@ -1,0 +1,164 @@
+<section id="buy-credit" class="container" style="padding: 48px 0 60px">
+  <div
+    class="panel"
+    style="padding: 32px; display: flex; flex-direction: column; gap: 24px"
+  >
+    <div
+      style="
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 12px;
+      "
+    >
+      <h2 class="h2" style="margin: 0">Buy EnerCoins</h2>
+      <div class="muted" style="display: flex; align-items: center; gap: 8px">
+        <span>Your balance is</span>
+        <span
+          style="
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+          "
+        >
+          <span
+            style="
+              display: inline-block;
+              height: 18px;
+              width: 18px;
+              border-radius: 50%;
+              background: linear-gradient(135deg, #f5b700, #ffcc33);
+            "
+          ></span>
+          {{ balance | number : "1.0-0" }} EnerCoin
+        </span>
+      </div>
+    </div>
+    <p class="muted" style="margin: 0">
+      EnerCoins let you generate DayAhead and Intra-Day forecasts, activate
+      Advanced Forecasting, and access premium platform features.
+      <!-- <a href="mailto:support@enerbuff.ai" class="muted" style="text-decoration:underline">More info</a> -->
+    </p>
+    <div
+      *ngIf="!isAuthenticated"
+      class="muted"
+      style="
+        padding: 12px 16px;
+        border: 1px dashed var(--ring);
+        border-radius: 10px;
+        background: rgba(15, 23, 42, 0.3);
+        color: #ff6b6b;
+        font-weight: 600;
+        text-align: center;
+      "
+    >
+      Please log in to purchase EnerCoins.
+    </div>
+    <div
+      *ngIf="feedback"
+      style="
+        padding: 12px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        text-align: center;
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        background: rgba(15, 23, 42, 0.4);
+        margin-top: -8px;
+      "
+      [style.color]="feedback.tone === 'success' ? '#4ade80' : '#ff6b6b'"
+    >
+      {{ feedback.message }}
+    </div>
+    <div style="display: flex; flex-wrap: wrap; gap: 24px">
+      <div
+        class="panel"
+        style="
+          flex: 1 1 320px;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+        "
+      >
+        <h3 class="h4" style="margin: 0">Selected package</h3>
+        <div class="muted" style="display: flex; justify-content: space-between">
+          <span>EnerCoins</span>
+          <span>{{ selectedCredits | number : "1.0-0" }}</span>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+          "
+        >
+          <span>Rate</span>
+          <span>{{ pricePerCredit | currency : "INR" : "symbol" : "1.0-0" }} / EnerCoin</span>
+        </div>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--ring);
+            padding-top: 12px;
+            font-weight: 600;
+          "
+        >
+          <span>Total (INR)</span>
+          <span>{{ total | currency : "INR" : "symbol" : "1.0-0" }}</span>
+        </div>
+        <button
+          class="btn btn-primary"
+          style="width: 100%"
+          [disabled]="!isAuthenticated || checkoutProcessing"
+          [title]="
+            !isAuthenticated ? 'Please login to buy EnerCoins' : checkoutProcessing ? 'Preparing checkout' : null
+          "
+          (click)="checkout()"
+        >
+          {{ checkoutProcessing ? 'Redirecting...' : 'Checkout' }}
+        </button>
+      </div>
+      <div
+        class="panel"
+        style="
+          flex: 1 1 260px;
+          padding: 24px;
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        "
+      >
+        <h3 class="h4" style="margin: 0">Quick buy</h3>
+        <button
+          *ngFor="let credits of packages"
+          class="btn"
+          [class.btn-primary]="credits === selectedCredits"
+          [class.btn-ghost]="credits !== selectedCredits"
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+          "
+          (click)="selectPackage(credits)"
+          [disabled]="!isAuthenticated || checkoutProcessing"
+          [title]="
+            !isAuthenticated
+              ? 'Please login to buy EnerCoins'
+              : checkoutProcessing
+              ? 'Checkout is already in progress'
+              : null
+          "
+        >
+          <span>{{ credits | number : "1.0-0" }} EnerCoins</span>
+          <span>{{
+            (credits * pricePerCredit) | currency : "INR" : "symbol" : "1.0-0"
+          }}</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

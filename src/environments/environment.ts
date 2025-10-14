@@ -1,0 +1,8 @@
+export const environment = {
+  production: false,
+  // API base URL for your backend
+  apiBaseUrl: 'https://enerai-devapi.enerbuff.com',
+  // UPI fallback settings
+  upiId: 'merchant@upi',
+  upiName: 'EnerBuff',
+};

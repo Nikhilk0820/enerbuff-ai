@@ -1,0 +1,89 @@
+<section class="auth-shell">
+  <div class="auth-card">
+    <div class="auth-illustration">
+      <div class="auth-illustration__art">
+        <span class="auth-orb" style="width:168px;height:168px;left:50%;top:50%;transform:translate(-50%,-58%);background:radial-gradient(circle at 30% 30%,#ffeaa7,#fbbf24 45%,#f97316 100%)"></span>
+        <span class="auth-orb" style="width:260px;height:260px;left:50%;top:48%;transform:translate(-50%,-50%)rotate(-8deg);border:2px solid rgba(255,255,255,.4)"></span>
+        <span class="auth-orb" style="width:72px;height:72px;right:18%;top:26%;background:radial-gradient(circle at 40% 40%,#fff,#f1a7ff);box-shadow:0 0 24px rgba(255,255,255,.45)"></span>
+        <span class="auth-star" style="left:22%;top:18%;transform:scale(.85)"></span>
+        <span class="auth-star" style="left:68%;bottom:20%;transform:scale(.65)"></span>
+        <span class="auth-star" style="right:12%;bottom:10%;transform:scale(.55)"></span>
+      </div>
+      <div class="auth-illustration__copy">
+        <h2>Forecast Faster. Decide Smarter.</h2>
+        <p>Login your EnerBuff AI account to access premium forecasting workflows and unlock EnerCoins.</p>
+      </div>
+      <p class="auth-tip">Tip: Buy EnerCoins to unlock unlimited forecasting and collaboration features.</p>
+    </div>
+
+    <div class="auth-panel">
+      <div class="auth-panel__header">
+        <span class="auth-greeting">Greeting Utilities!</span>
+        <p class="auth-command"><span>{{ tab === 'login' ? 'Login' : 'Create' }}</span> your account</p>
+      </div>
+
+      <div class="auth-tabs" role="tablist">
+        <button type="button" class="auth-tab" role="tab" [attr.aria-selected]="tab==='login'" [class.active]="tab==='login'" (click)="tab='login'">Login</button>
+        <button type="button" class="auth-tab" role="tab" [attr.aria-selected]="tab==='register'" [class.active]="tab==='register'" (click)="tab='register'">Register</button>
+      </div>
+
+      <form *ngIf="tab==='login'" (submit)="onLogin($event)" class="auth-form">
+        <label class="auth-field">
+          <span>Email</span>
+          <input class="auth-input" name="lEmail" type="email" [(ngModel)]="lEmail" required placeholder="you@company.com" />
+        </label>
+        <label class="auth-field">
+          <span>Password</span>
+          <input class="auth-input" name="lPassword" type="password" [(ngModel)]="lPassword" required placeholder="********" />
+        </label>
+        <div class="auth-inline">
+          <a class="auth-link" href="mailto:support@enerbuff.ai">Forgot password?</a>
+        </div>
+        <div class="auth-error" *ngIf="lMessage">{{ lMessage }}</div>
+        <button class="btn btn-primary" type="submit">Login</button>
+        <p class="auth-switch">New here? <button class="auth-link" type="button" (click)="tab='register'">Create an account</button></p>
+      </form>
+
+      <form *ngIf="tab==='register'" (submit)="onRegister($event)" class="auth-form">
+        <div class="auth-form__row">
+          <label class="auth-field">
+            <span>First name</span>
+            <input class="auth-input" name="firstName" [(ngModel)]="firstName" required />
+          </label>
+          <label class="auth-field">
+            <span>Last name</span>
+            <input class="auth-input" name="lastName" [(ngModel)]="lastName" required />
+          </label>
+        </div>
+        <label class="auth-field">
+          <span>Work email</span>
+          <input class="auth-input" name="email" type="email" [(ngModel)]="email" required placeholder="you@company.com" />
+        </label>
+        <label class="auth-field">
+          <span>Mobile number</span>
+          <input class="auth-input" name="phone" [(ngModel)]="phone" required placeholder="95******12" />
+        </label>
+        <label class="auth-field">
+          <span>Select a state to forecast</span>
+          <select class="auth-input" name="state" [(ngModel)]="state" required>
+            <option value="" disabled>Select a state to forecast</option>
+            <option *ngFor="let s of states" [ngValue]="s">{{ s }}</option>
+          </select>
+        </label>
+        <div class="auth-form__row">
+          <label class="auth-field">
+            <span>Password</span>
+            <input class="auth-input" name="password" type="password" [(ngModel)]="password" required placeholder="********" />
+          </label>
+          <label class="auth-field">
+            <span>Confirm password</span>
+            <input class="auth-input" name="confirm" type="password" [(ngModel)]="confirm" required placeholder="********" />
+          </label>
+        </div>
+        <div class="auth-error" *ngIf="rMessage">{{ rMessage }}</div>
+        <button class="btn btn-primary" type="submit">Create account</button>
+        <p class="auth-switch">Already have an account? <button class="auth-link" type="button" (click)="tab='login'">Login</button></p>
+      </form>
+    </div>
+  </div>
+</section>

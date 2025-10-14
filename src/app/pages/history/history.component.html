@@ -1,0 +1,61 @@
+<section class="container" style="padding: 32px 0 48px">
+  <h1 style="font-size: 28px; font-weight: 700; margin-bottom: 18px">Event History</h1>
+  <p class="muted" style="margin-bottom: 24px; max-width: 720px">
+    Review the history of template preparation and synthetic forecast runs performed in EnerBuff.
+  </p>
+
+  <ng-container *ngIf="isLoggedIn; else guestNotice">
+    <div *ngIf="loading" style="margin-bottom: 16px; color: #94a3b8">
+      Loading event history...
+    </div>
+
+    <div *ngIf="!loading && error" style="margin-bottom: 16px; color: #f87171; font-weight: 600">
+      {{ error }}
+      <button class="btn" style="margin-left: 12px" (click)="refreshEntries()">Retry</button>
+    </div>
+
+    <ng-container *ngIf="!loading && !error">
+      <div *ngIf="hasEntries; else emptyState">
+        <div style="overflow-x: auto; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2)">
+          <table style="width: 100%; border-collapse: collapse; min-width: 600px">
+            <thead style="background: #0f161f">
+              <tr style="text-align: left">
+                <th style="padding: 12px; color: #e5e7eb; font-weight: 600">User Name</th>
+                <th style="padding: 12px; color: #e5e7eb; font-weight: 600">Event</th>
+                <th style="padding: 12px; color: #e5e7eb; font-weight: 600">Mode</th>
+                <th style="padding: 12px; color: #e5e7eb; font-weight: 600">EnerCoin Used</th>
+                <th style="padding: 12px; color: #e5e7eb; font-weight: 600">Date</th>
+                <th style="padding: 12px; color: #e5e7eb; font-weight: 600">Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let entry of entries" style="border-top: 1px solid rgba(148, 163, 184, 0.12)">
+                <td style="padding: 12px; color: #cbd5f5">{{ entry.userName }}</td>
+                <td style="padding: 12px; color: #cbd5f5">{{ entry.action }}</td>
+                <td style="padding: 12px; color: #cbd5f5">{{ entry.eventType }}</td>
+                <td style="padding: 12px; color: #cbd5f5">{{ entry.enerCoinsUsed | number: '1.0-0' }}</td>
+                <td style="padding: 12px; color: #cbd5f5">{{ entry.triggeredAt | date: 'mediumDate' }}</td>
+                <td style="padding: 12px; color: #cbd5f5">{{ entry.triggeredAt | date: 'shortTime' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <button class="btn" style="margin-top: 16px" (click)="refreshEntries()" [disabled]="loading">
+          Refresh
+        </button>
+      </div>
+    </ng-container>
+  </ng-container>
+
+  <ng-template #guestNotice>
+    <div class="panel" style="padding: 24px; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2)">
+      Kindly login to show data.
+    </div>
+  </ng-template>
+
+  <ng-template #emptyState>
+    <div class="panel" style="padding: 24px; border-radius: 12px; border: 1px solid rgba(148, 163, 184, 0.2); color: #94a3b8">
+      No events recorded yet. Trigger a template creation or forecast run to populate this page.
+    </div>
+  </ng-template>
+</section>

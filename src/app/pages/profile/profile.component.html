@@ -1,0 +1,77 @@
+<section class="auth-shell profile-shell">
+  <div class="auth-card profile-card">
+    <div class="auth-illustration profile-illustration">
+      <div class="auth-illustration__art">
+        <span class="auth-orb auth-orb--planet"></span>
+        <span class="auth-orb auth-orb--ring"></span>
+        <span class="auth-orb auth-orb--moon"></span>
+        <span class="auth-star auth-star--1"></span>
+        <span class="auth-star auth-star--2"></span>
+        <span class="auth-star auth-star--3"></span>
+      </div>
+      <div class="auth-illustration__copy">
+        <h2>Keep your EnerBuff account current</h2>
+        <p>Refresh your contact details, stay informed about grid events, and make sure your team can reach you when it counts.</p>
+      </div>
+      <p class="auth-tip">Tip: Use your official work email so we can automatically sync your EnerCoins and enterprise benefits.</p>
+    </div>
+
+    <div class="auth-panel profile-panel">
+      <div class="auth-panel__header">
+        <span class="auth-greeting">My Profile</span>
+        <h1>Profile Settings</h1>
+        <p class="auth-command"><span>Update</span> your personal and mandatory information.</p>
+      </div>
+
+      <form (submit)="save($event)" class="auth-form profile-form">
+        <div class="auth-form__row">
+          <label class="auth-field">
+            <span>First name</span>
+            <input class="auth-input" name="firstName" [(ngModel)]="firstName" required />
+          </label>
+          <label class="auth-field">
+            <span>Last name</span>
+            <input class="auth-input" name="lastName" [(ngModel)]="lastName" required />
+          </label>
+        </div>
+
+        <label class="auth-field">
+          <span>Work email</span>
+          <input class="auth-input" name="email" type="email" [(ngModel)]="email" required />
+          <small class="profile-hint">Use your organization email only.</small>
+        </label>
+
+        <label class="auth-field">
+          <span>Mobile number with country code</span>
+          <input class="auth-input" name="phone" [(ngModel)]="phone" placeholder="+15551234567" />
+          <small class="profile-hint">We'll use this to provide you better support.</small>
+        </label>
+
+        <div class="profile-expand">
+          <button type="button" class="profile-expand__toggle" (click)="togglePasswordSection($event)" [attr.aria-expanded]="passwordExpanded">
+            <span>Change password</span>
+            <span class="profile-expand__icon" [class.is-open]="passwordExpanded"></span>
+          </button>
+          <div class="profile-expand__content" *ngIf="passwordExpanded">
+            <div class="auth-form__row">
+              <label class="auth-field">
+                <span>New password</span>
+                <input class="auth-input" name="password" type="password" [(ngModel)]="password" />
+              </label>
+              <label class="auth-field">
+                <span>Confirm password</span>
+                <input class="auth-input" name="confirm" type="password" [(ngModel)]="confirm" />
+              </label>
+            </div>
+            <small class="profile-hint">Passwords must match and be at least 8 characters.</small>
+          </div>
+        </div>
+
+        <div class="auth-error" *ngIf="message">{{ message }}</div>
+        <div class="profile-success" *ngIf="success">{{ success }}</div>
+
+        <button class="btn btn-primary auth-submit" type="submit">Save changes</button>
+      </form>
+    </div>
+  </div>
+</section>
